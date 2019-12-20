@@ -1,10 +1,14 @@
 # common
 .vscode
 .DS_Store
+package-lock.json
+node_modules
 
 # server
-server/node_modules
 server/runtime
 
-.idea/
+# web-admin
+
+# web-h5
+
 package-lock.json
