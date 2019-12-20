@@ -1,0 +1,15 @@
+{
+  "apps": [{
+    "name": "baby_life",
+    "script": "production.js",
+    "cwd": "/home/pi/thinkjs/baby_life",
+    "exec_mode": "fork",
+    "max_memory_restart": "1G",
+    "autorestart": true,
+    "node_args": [],
+    "args": [],
+    "env": {
+      
+    }
+  }]
+}

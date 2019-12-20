@@ -1,0 +1,49 @@
+// 修改 iview 默认样式
+@import "~view-design/src/styles/index.less";
+@primary-color: #4ab176;
+
+* {
+  padding: 0;
+  margin: 0;
+}
+
+.ivu-layout-header {
+  padding: 0;
+}
+
+.ivu-layout-content {
+  background-color: #fff;
+}
+
+.form-item {
+  width: 200px;
+}
+
+.form-item-datetime {
+  width: 280px;
+}
+
+.search-form-btns {
+  .ivu-form-item-content {
+    margin-left: 0 !important;
+  }
+  button:first-child {
+    margin-right: 10px;
+  }
+}
+
+.table-wrapper {
+  margin: 20px 0;
+}
+
+.table-action {
+  & > * {
+    margin-right: 7px;
+  }
+}
+
+.ivu-btn-text {
+  padding: 0;
+  margin: 0;
+  color: @primary-color;
+}

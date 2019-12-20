@@ -1,0 +1,1 @@
+live-server --port=11000 --no-browser /Users/relax/Documents/upload
