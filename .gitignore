@@ -1,0 +1,10 @@
+# common
+.vscode
+.DS_Store
+
+# server
+server/node_modules
+server/runtime
+
+.idea/
+package-lock.json
