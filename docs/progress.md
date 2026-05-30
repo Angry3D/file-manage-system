@@ -11,7 +11,7 @@
 
 ## 关联待办
 
-TODO-0005, TODO-0009
+TODO-0005, TODO-0011
 
 ## 当前计划
 
@@ -32,6 +32,7 @@ TODO-0005, TODO-0009
 | 修复管理端删除图片接口响应 | done | `deleteAction` 删除后返回 `this.success(count)`，其中 `count` 为数据库删除行数。 |
 | 修复编辑图片字段同步 | done | 替换图片时前端提交 `image_thumb` 和 `image_id`，服务端同步更新原图、缩略图和上传图片 ID。 |
 | 修复新增多图写入等待 | done | `addAction` 使用 `Promise.all` 等待所有图片记录写入完成后返回实际写入数量。 |
+| 外置服务端敏感和环境差异配置 | done | 已支持环境变量覆盖数据库连接、上传目录、文件访问地址、服务端端口和本地文件服务端口；数据库密码不再保留明文默认值。 |
 | 实施修复或完善 | pending | 遵循现有项目风格。 |
 | 验证并记录结果 | pending | 使用项目已有命令或手工验证。 |
 
@@ -49,6 +50,8 @@ planned
 - 2026-05-30：TODO-0010 已提交为 `1f015a3 chore: upgrade frontend security dependencies`，随后进入 TODO-0007。
 - 2026-05-30：TODO-0007 已提交为 `cdc4286 fix: return success response after image delete`，随后进入 TODO-0008。
 - 2026-05-30：TODO-0008 已提交为 `e9d8b32 fix: sync image thumbnail fields on edit`，随后进入 TODO-0009。
+- 2026-05-30：TODO-0009 已提交为 `0a62c86 fix: wait for all image inserts before success`，随后进入 TODO-0011。
+- 2026-05-30：服务端数据库密码不再保留明文默认值，后续本地或部署启动需要通过 `BABYLIFE_DB_PASSWORD` 注入非空密码。
 
 ## 阻塞项
 
@@ -70,7 +73,9 @@ planned
 - 2026-05-30：TODO-0008 执行 `git diff --check` 通过。
 - 2026-05-30：TODO-0009 执行 `node --check server/src/controller/admin/image.js` 通过。
 - 2026-05-30：TODO-0009 执行 `git diff --check` 通过。
+- 2026-05-30：TODO-0011 执行 `node --check` 校验 `server/src/config/env.js`、`adapter.js`、`define.js`、`config.js`、`config.production.js` 均通过。
+- 2026-05-30：TODO-0011 执行 `sh -n server/script/file-server.sh` 通过。
 
 ## 下一步
 
-继续处理 P1 问题，优先 TODO-0011 或 TODO-0012。
+继续处理 P1 问题，优先 TODO-0012 图片上传链路健壮性。

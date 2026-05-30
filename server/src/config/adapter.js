@@ -4,6 +4,7 @@ const fileSession = require('think-session-file');
 const mysql = require('think-model-mysql');
 const {Console, File, DateFile} = require('think-logger3');
 const path = require('path');
+const Env = require('./env');
 const isDev = think.env === 'development';
 
 /**
@@ -36,15 +37,15 @@ exports.model = {
   },
   admin: {
     handle: mysql,
-    database: 'db_babylife',
-    prefix: 'admin_',
-    encoding: 'utf8',
-    host: '127.0.0.1',
-    port: '3306',
-    user: 'root',
-    password: 'relax666',
+    database: Env.get('BABYLIFE_DB_NAME', 'db_babylife'),
+    prefix: Env.get('BABYLIFE_DB_PREFIX', 'admin_'),
+    encoding: Env.get('BABYLIFE_DB_ENCODING', 'utf8'),
+    host: Env.get('BABYLIFE_DB_HOST', '127.0.0.1'),
+    port: Env.get('BABYLIFE_DB_PORT', '3306'),
+    user: Env.get('BABYLIFE_DB_USER', 'root'),
+    password: Env.get('BABYLIFE_DB_PASSWORD', ''),
     dateStrings: true,
-    charset: 'utf8mb4'
+    charset: Env.get('BABYLIFE_DB_CHARSET', 'utf8mb4')
   }
 };
 

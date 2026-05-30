@@ -19,10 +19,11 @@
 - `web-h5/package.json` 定义了 `serve`、`build`、`lint` 脚本。
 - 服务端开发和生产入口分别是 `server/development.js` 与 `server/production.js`，默认端口为 `20000`。
 - 服务端 `server/src/config/router.js` 当前为空数组，接口路径依赖 ThinkJS 默认路由约定。
-- 服务端数据库适配器使用 MySQL，`admin` 连接配置的数据库名为 `db_babylife`，表前缀为 `admin_`。
-- 服务端文件配置中，开发环境上传目录为 `/Users/relax/Documents/upload`，生产环境上传目录为 `/mnt/a/data/upload`。
-- 服务端文件访问地址中，开发环境为 `http://127.0.0.1:11000/`，生产环境为 `http://file.relaxcoder.top/`。
-- `server/script/file-server.sh` 使用 `live-server --port=11000 --no-browser /Users/relax/Documents/upload` 启动本地文件服务。
+- 服务端数据库适配器使用 MySQL，默认数据库名为 `db_babylife`，默认表前缀为 `admin_`，连接参数支持通过 `BABYLIFE_DB_*` 环境变量覆盖。
+- 服务端数据库密码不再保留明文默认值；需要通过 `BABYLIFE_DB_PASSWORD` 环境变量注入。
+- 服务端文件配置中，开发环境默认上传目录为 `/Users/relax/Documents/upload`，生产环境默认上传目录为 `/mnt/a/data/upload`，可通过 `BABYLIFE_UPLOAD_DIR` 覆盖。
+- 服务端文件访问地址中，开发环境默认值为 `http://127.0.0.1:11000/`，生产环境默认值为 `http://file.relaxcoder.top/`，可通过 `BABYLIFE_FILE_HOST` 覆盖。
+- `server/script/file-server.sh` 默认使用 `live-server --port=11000 --no-browser /Users/relax/Documents/upload` 启动本地文件服务，端口和目录可分别通过 `BABYLIFE_FILE_SERVER_PORT`、`BABYLIFE_UPLOAD_DIR` 覆盖。
 - 图片上传接口在 `server/src/controller/common/upload.js` 中处理，非 GIF 图片会通过 Sharp 生成原图和缩略图，GIF 复用原图作为缩略图。
 - 图片上传记录写入 `admin_upload_image` 语义的模型表，字段包含原文件名、相对路径、缩略图相对路径。
 - 管理端新增图片记录写入 `admin_image` 语义的模型表，字段包含创建时间、展示状态、地点、备注、图片地址、缩略图地址和上传图片 ID；新增多图时会等待所有数据库写入完成后返回实际写入数量。
@@ -61,7 +62,6 @@
 
 - `web-admin/README.md` 保留了 `npm run test` 说明，但 `web-admin/package.json` 未定义 `test` 脚本；是否需要补充测试脚本待确认。
 - 数据库表结构、初始管理员账号、图片表和上传图片表的约束规则没有在仓库中记录，后续实现或验证前需要确认。
-- `server/src/config/adapter.js` 中存在明文数据库连接信息；是否保留为本地私有项目写法，还是迁移到环境变量，需要确认。
 - `TODO-0001` 到 `TODO-0003` 已由用户确认本次暂缓；本阶段优化范围不包含视频、文档管理或 Flutter 新功能。
 
 ## 证据来源
@@ -90,6 +90,7 @@
 - `server/package.json`
 - `server/README.md`
 - `server/src/config/adapter.js`
+- `server/src/config/env.js`
 - `server/src/config/define.js`
 - `server/src/config/router.js`
 - `server/src/controller/base.js`
