@@ -14,6 +14,7 @@
 - `web-admin/` 是基于 Vue.js 和 iView/View Design 的管理端项目。
 - `web-h5/` 是基于 Vue.js 和 Vant 的 H5 照片墙项目。
 - 当前 README 记录已实现图片管理和展示功能，图片格式仅支持 GIF / JPG / PNG。
+- 根 README、`server/README.md`、`web-admin/README.md` 和 `web-h5/README.md` 已补充当前项目使用说明，覆盖 pnpm workspace、运行环境、启动构建、配置项、验证命令和安全审计状态。
 - `server/package.json` 定义了 `start`、`serve`、`test`、`lint`、`lint-fix` 脚本。
 - `web-admin/package.json` 定义了 `serve`、`build`、`lint` 脚本。
 - `web-h5/package.json` 定义了 `serve`、`build`、`lint` 脚本。
