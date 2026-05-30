@@ -27,7 +27,7 @@ TODO-0005, TODO-0006
 | --- | --- | --- |
 | 盘点已有图片管理/展示链路 | done | 已覆盖 `server/`、`web-admin/`、`web-h5/`，客观事实已补充到 `docs/project-facts.md`。 |
 | 确认本阶段具体修复点 | done | 用户已确认落盘；优化集合已写入 `docs/backlog.md` 的 TODO-0006 至 TODO-0015。 |
-| 建立依赖治理基线 | planned | 对应 TODO-0006，优先引入 pnpm workspace 和统一锁文件。 |
+| 建立依赖治理基线 | done | 已引入 pnpm workspace、根 package、hoisted 配置和统一锁文件。 |
 | 实施修复或完善 | pending | 遵循现有项目风格。 |
 | 验证并记录结果 | pending | 使用项目已有命令或手工验证。 |
 
@@ -39,6 +39,7 @@ planned
 
 - 2026-05-30：用户明确 `TODO-0001` 到 `TODO-0003` 暂缓，本次核心目标是完善已有功能，而不是做新功能迭代。
 - 2026-05-30：针对 TS、pnpm、GitHub 安全漏洞提示的疑问，确认本轮优先建立依赖治理基线并处理依赖安全与已有功能问题；TypeScript 仅作为后续研究项，不进入本轮实施主线。
+- 2026-05-30：pnpm workspace 基线采用 `node-linker=hoisted`，优先兼容 ThinkJS 3、Vue CLI 3/4 等老工具链，再逐步做依赖安全升级。
 
 ## 阻塞项
 
@@ -46,8 +47,10 @@ planned
 
 ## 验证
 
-- 2026-05-30：已完成项目通读和静态盘点，尚未运行依赖安装、构建、lint 或测试。已完成阶段见 `docs/archive/README.md`。
+- 2026-05-30：已完成项目通读和静态盘点。已完成阶段见 `docs/archive/README.md`。
+- 2026-05-30：执行 `pnpm install --lockfile-only` 成功生成统一 `pnpm-lock.yaml`；执行 `pnpm install --lockfile-only --frozen-lockfile` 通过。
+- 2026-05-30：执行 `pnpm audit --prod` 建立安全审计基线，发现生产依赖漏洞 40 个，严重度为 17 high、21 moderate、2 low；命令因发现漏洞返回非 0，后续进入 TODO-0010 处理。
 
 ## 下一步
 
-从 TODO-0006 开始实施，先建立 pnpm workspace 和统一锁文件，再继续依赖安全升级与核心功能修复。
+继续处理 TODO-0010，基于统一锁文件优先升级低破坏面的安全依赖；暂不归档 TODO-0006，等待用户确认或明确要求。

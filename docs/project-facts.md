@@ -37,16 +37,22 @@
 - 仓库没有发现 SQL schema 或数据库迁移文件。
 - 仓库根 `.gitignore` 忽略 `package-lock.json`、`node_modules` 和 `server/runtime`。
 - 2026-05-30 在 `server/`、`web-admin/`、`web-h5/` 分别执行 `npm audit --json` 均因缺少 lockfile 返回 `ENOLOCK`，当前无法用 npm 在本地生成稳定的安全审计结果。
+- 2026-05-30 已建立 pnpm workspace 基线：根目录包含 `package.json`、`pnpm-workspace.yaml`、`.npmrc` 和统一 `pnpm-lock.yaml`。
+- pnpm workspace 当前纳入 `server/`、`web-admin/`、`web-h5/` 三个子项目。
+- 根 `package.json` 通过 `engines.pnpm` 声明 pnpm 版本范围为 `>=10 <11`，并提供递归 `build`、`lint`、`test` 脚本。
+- 根 `.npmrc` 显式配置 `node-linker=hoisted` 和 `shared-workspace-lockfile=true`，用于兼容 ThinkJS 3、Vue CLI 3/4 等老工具链的依赖解析。
+- 2026-05-30 执行 `pnpm install --lockfile-only --frozen-lockfile` 通过，统一锁文件与 workspace 配置一致。
+- 2026-05-30 执行 `pnpm audit --prod` 后发现生产依赖漏洞 40 个，严重度为 17 high、21 moderate、2 low；高风险路径包括 `server>sharp`、`server>sharp>tar`、`server>thinkjs>think-validator>validator`、`web-admin>axios`、`web-h5>axios`。
 
 ## 推断事实
 
 - 这是一个多子项目仓库；运行命令时通常需要进入对应子目录执行。
 - 当前核心可用业务链路是：管理端登录 -> 图片上传 -> 图片新增/编辑/状态管理/删除 -> H5 照片墙展示。
 - 当前项目更偏个人/家庭照片管理场景；部分配置包含本机路径和线上域名，部署前需要按环境确认。
+- 当前依赖安全治理已有可重复锁文件基础；后续安全升级应基于 `pnpm-lock.yaml` 对比变更。
 
 ## 待确认事项
 
-- 仓库未发现 JavaScript 锁文件；修改依赖前需要确认各子项目预期使用 npm、yarn、pnpm 还是其他包管理器。
 - `web-admin/README.md` 保留了 `npm run test` 说明，但 `web-admin/package.json` 未定义 `test` 脚本；是否需要补充测试脚本待确认。
 - 数据库表结构、初始管理员账号、图片表和上传图片表的约束规则没有在仓库中记录，后续实现或验证前需要确认。
 - `server/src/config/adapter.js` 中存在明文数据库连接信息；是否保留为本地私有项目写法，还是迁移到环境变量，需要确认。
@@ -71,6 +77,10 @@
 ## 重要文件
 
 - `README.md`
+- `package.json`
+- `pnpm-workspace.yaml`
+- `.npmrc`
+- `pnpm-lock.yaml`
 - `server/package.json`
 - `server/README.md`
 - `server/src/config/adapter.js`
@@ -112,7 +122,19 @@
 
 ## 常用命令
 
-需要先进入对应子目录执行。
+优先在根目录使用 pnpm workspace 命令；如需调试单个子项目，也可以进入对应子目录执行原有 npm scripts。
+
+### 根目录
+
+- `pnpm install`：按统一锁文件安装所有 workspace 依赖。
+- `pnpm install --lockfile-only --frozen-lockfile`：校验 `pnpm-lock.yaml` 与 workspace 配置一致。
+- `pnpm audit --prod`：审计生产依赖漏洞。
+- `pnpm lint`：递归执行存在的 `lint` 脚本。
+- `pnpm build`：递归执行存在的 `build` 脚本。
+- `pnpm test`：递归执行存在的 `test` 脚本。
+- `pnpm --filter server <script>`：只在服务端执行脚本。
+- `pnpm --filter web-front <script>`：只在管理端执行脚本。
+- `pnpm --filter web-h5 <script>`：只在 H5 端执行脚本。
 
 ### 服务端
 

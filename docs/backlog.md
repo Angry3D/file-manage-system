@@ -41,7 +41,7 @@
 | TODO-0003 | candidate | feature | 新增 Flutter 前端。 | `README.md` 后续计划 | 根 README 列出“前端新增 Flutter”。 | 用户已明确本次暂缓；不要纳入当前阶段。 |
 | TODO-0004 | candidate | docs | 补充各端使用说明和项目文档。 | `README.md` 说明 | 根 README 写明“很多用法介绍没来得及写 README，后面会陆续补充”。 | 可优先补运行环境、启动命令、配置项和部署流程。 |
 | TODO-0005 | planned | refactor | 完善当前项目已有功能，优先围绕已实现的图片管理和展示能力做质量提升。 | 用户明确本次任务目标 | 用户说明“本次任务的核心目标是完善当前项目的已有功能，而不是做新功能迭代”。 | 当前阶段目标；避免扩展到视频、文档、Flutter 等新功能。 |
-| TODO-0006 | planned | chore | P0 建立依赖治理基线：引入 pnpm workspace 和统一锁文件。 | 用户关于 pnpm 和安全漏洞的疑问；项目通读 | 仓库有 `server/`、`web-admin/`、`web-h5/` 三个 npm 子项目；当前没有 lockfile，`npm audit --json` 在三个子项目均因 `ENOLOCK` 失败。 | 本轮优先级最高；先建立可重复依赖图，再做安全升级。需评估老工具链是否需要 `node-linker=hoisted`。 |
+| TODO-0006 | done | chore | P0 建立依赖治理基线：引入 pnpm workspace 和统一锁文件。 | 用户关于 pnpm 和安全漏洞的疑问；项目通读 | 仓库有 `server/`、`web-admin/`、`web-h5/` 三个 npm 子项目；此前没有 lockfile，`npm audit --json` 在三个子项目均因 `ENOLOCK` 失败；现已建立根 `package.json`、`pnpm-workspace.yaml`、`.npmrc` 和统一 `pnpm-lock.yaml`。 | 已完成基线建立，采用 `node-linker=hoisted` 兼容老工具链；等待用户确认或明确要求后再归档。 |
 | TODO-0007 | todo | bug | P0 修复管理端删除图片接口无成功响应。 | 项目通读 | `server/src/controller/admin/image.js` 的 `deleteAction` 删除后没有返回 `this.success()`，管理端删除流程依赖 Promise 完成后刷新列表。 | 影响已有图片管理核心链路。 |
 | TODO-0008 | todo | bug | P0 修复编辑图片时缩略图和上传图片 ID 不同步更新。 | 项目通读 | `web-admin/src/views/file/image/ImageAdd.vue` 编辑提交了 `image_thumb`，但 `server/src/controller/admin/image.js` 的 `setAction` 未更新 `image_thumb` 和 `image_id`。 | 替换图片后列表/H5 可能仍显示旧缩略图。 |
 | TODO-0009 | todo | bug | P0 修复新增多张图片时未等待所有数据库写入完成。 | 项目通读 | `server/src/controller/admin/image.js` 的 `addAction` 使用 `params.images.forEach(async ...)` 后立即返回成功。 | 可能导致响应成功时图片记录尚未全部写入。 |
