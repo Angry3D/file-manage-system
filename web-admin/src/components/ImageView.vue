@@ -74,22 +74,25 @@ export default {
     onClose() {
       this.$emit("update:show", false);
     },
-    onKeyLeft() {
-      console.log("keyleft");
-    },
     onLeft() {
-      if (this.curIndex - 1 == 0) {
-        this.$Message.info("已经是第一张了");
+      if (!this.show || !this.images.length) {
+        return;
       }
-      this.curIndex =
-        this.curIndex - 1 < 0 ? this.images.length - 1 : this.curIndex - 1;
+      if (!this.curIndex) {
+        this.$Message.info("已经是第一张了");
+        return;
+      }
+      this.curIndex--;
     },
     onRight() {
-      if (this.curIndex + 1 == this.images.length - 1) {
-        this.$Message.info("已经是最后一张了");
+      if (!this.show || !this.images.length) {
+        return;
       }
-      this.curIndex =
-        this.curIndex + 1 > this.images.length - 1 ? 0 : this.curIndex + 1;
+      if (this.curIndex == this.images.length - 1) {
+        this.$Message.info("已经是最后一张了");
+        return;
+      }
+      this.curIndex++;
     }
   }
 };

@@ -134,17 +134,21 @@ export default {
         },
         this.reqParams
       );
-      this.reqFunc(params).then(data => {
-        this.formatter && this.formatter(data.list);
-        this.total = data.total;
-        this.list = data.list;
-        this.loading = false;
-        // 如果不是第1页，并且请求到的数据为空，那么往上一页，重新请求
-        if (this.page != 1 && !this.list.length) {
-          this.page--;
-          this.requestList();
-        }
-      });
+      this.reqFunc(params)
+        .then(data => {
+          this.formatter && this.formatter(data.list);
+          this.total = data.total;
+          this.list = data.list;
+          this.loading = false;
+          // 如果不是第1页，并且请求到的数据为空，那么往上一页，重新请求
+          if (this.page != 1 && !this.list.length) {
+            this.page--;
+            this.requestList();
+          }
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };

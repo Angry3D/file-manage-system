@@ -25,7 +25,7 @@ export default {
     },
     reqLimit: {
       type: Number,
-      defautl: 0
+      default: 0
     },
     onFormatter: {
       type: Function
@@ -66,27 +66,32 @@ export default {
     // request
     requestList() {
       if (!this.reqFunc) return;
+      const limit = this.reqLimit || this.limit;
       const obj = {
         page: this.page,
-        limit: this.reqLimit || this.limit,
+        limit,
         ...this.reqParams
       };
-      this.reqFunc(obj).then(data => {
-        this.loading = false;
-        this.onFormatter && this.onFormatter(data.list);
-        if (this.page == 1) {
-          this.list = data.list;
-          this.onPushdata && this.onPushdata(data.list);
-        } else {
-          this.list = this.list.concat(data.list);
-          this.onPushdata && this.onPushdata(data.list);
-        }
-        this.onGetdata && this.onGetdata(this.list);
-        // 判断是否完成
-        if ((this.page - 1) * this.limit + data.list.length >= data.total) {
-          this.finished = true;
-        }
-      });
+      this.reqFunc(obj)
+        .then(data => {
+          this.loading = false;
+          this.onFormatter && this.onFormatter(data.list);
+          if (this.page == 1) {
+            this.list = data.list;
+            this.onPushdata && this.onPushdata(data.list);
+          } else {
+            this.list = this.list.concat(data.list);
+            this.onPushdata && this.onPushdata(data.list);
+          }
+          this.onGetdata && this.onGetdata(this.list);
+          // 判断是否完成
+          if ((this.page - 1) * limit + data.list.length >= data.total) {
+            this.finished = true;
+          }
+        })
+        .catch(() => {
+          this.loading = false;
+        });
     }
   }
 };

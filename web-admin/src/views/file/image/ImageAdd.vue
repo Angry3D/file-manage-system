@@ -152,7 +152,6 @@ export default {
   methods: {
     // on event
     onViewImage(item) {
-      console.log(item)
       this.viewModal.show = true;
       this.viewModal.images = [];
       this.uploader && this.uploader.getList().forEach((i, index) => {
@@ -160,7 +159,7 @@ export default {
         if (i.uid == item.uid) {
           this.viewModal.index = index;
         }
-      })
+      });
     },
     onDeleteImage(item) {
       const list = this.uploader.getList();

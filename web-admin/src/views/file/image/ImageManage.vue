@@ -251,8 +251,7 @@ export default {
       }
     },
     onEditModalOk() {
-      this.$api.setBatchImage(this.editModal.form).then(data => {
-        console.log(data);
+      this.$api.setBatchImage(this.editModal.form).then(() => {
         this.editModal.show = false;
         this.$refs.table.search();
         this.$Message.success("操作成功");

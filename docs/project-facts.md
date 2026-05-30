@@ -35,6 +35,10 @@
 - 管理端接口基础地址由 `web-admin/src/assets/js/env.js` 根据 `BUILD_ENV` 切换：开发环境 `http://localhost:20000/`，生产环境 `http://babyapi.relaxcoder.top/`。
 - H5 接口基础地址由 `web-h5/src/assets/js/env.js` 根据 `BUILD_ENV` 切换：开发环境 `http://localhost:20000/`，生产环境 `http://babyapi.relaxcoder.top/`。
 - 管理端登录后将 token 写入 `localStorage.adminToken`，请求时通过 header token 传给服务端。
+- 管理端登录表单用户名字段校验绑定到 `form.account`。
+- 管理端通用表格请求失败时会恢复 loading 状态。
+- 管理端图片查看器在首尾边界会停止切换并提示，不再循环到另一端。
+- H5 通用列表组件支持 `reqLimit` 默认值，并按实际请求 limit 判断分页是否完成。
 - 服务端 `Base` 控制器会校验管理端接口 token，并在请求结束后延长 token 过期时间。
 - `web-admin/src/views/file/video/VideoManage.vue` 与 `web-admin/src/views/system/AccountManage.vue` 当前是占位页面。
 - `web-h5/src/views/video/Video.vue` 当前提示“功能暂未开放”。

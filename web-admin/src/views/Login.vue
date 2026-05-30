@@ -6,7 +6,7 @@
     <p class="title">豆宝快来</p>
     <div class="form-box">
       <Form class="form" ref="form" :model="form" :rules="rules">
-        <FormItem prop="accout">
+        <FormItem prop="account">
           <Input
             prefix="ios-contact"
             v-model="form.account"

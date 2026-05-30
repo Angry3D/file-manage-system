@@ -11,7 +11,7 @@
 
 ## 关联待办
 
-TODO-0005, TODO-0012
+TODO-0005, TODO-0013
 
 ## 当前计划
 
@@ -34,6 +34,7 @@ TODO-0005, TODO-0012
 | 修复新增多图写入等待 | done | `addAction` 使用 `Promise.all` 等待所有图片记录写入完成后返回实际写入数量。 |
 | 外置服务端敏感和环境差异配置 | done | 已支持环境变量覆盖数据库连接、上传目录、文件访问地址、服务端端口和本地文件服务端口；数据库密码不再保留明文默认值。 |
 | 增强图片上传链路健壮性 | done | 写文件前会创建目标目录，并统一捕获图片处理和文件系统错误后返回业务错误。 |
+| 修复前端已有体验和状态问题 | done | 已修复登录校验、表格 loading、H5 分页、图片查看边界行为，并移除图片管理调试输出。 |
 | 实施修复或完善 | pending | 遵循现有项目风格。 |
 | 验证并记录结果 | pending | 使用项目已有命令或手工验证。 |
 
@@ -54,6 +55,7 @@ planned
 - 2026-05-30：TODO-0009 已提交为 `0a62c86 fix: wait for all image inserts before success`，随后进入 TODO-0011。
 - 2026-05-30：服务端数据库密码不再保留明文默认值，后续本地或部署启动需要通过 `BABYLIFE_DB_PASSWORD` 注入非空密码。
 - 2026-05-30：TODO-0011 已提交为 `e76abd7 chore: externalize server environment config`，随后进入 TODO-0012。
+- 2026-05-30：TODO-0012 已提交为 `4ab45e4 fix: harden image upload processing`，随后进入 TODO-0013。
 
 ## 阻塞项
 
@@ -80,7 +82,10 @@ planned
 - 2026-05-30：TODO-0012 执行 `node --check server/src/controller/common/upload.js` 通过。
 - 2026-05-30：TODO-0012 执行 `git diff --check` 通过。
 - 2026-05-30：TODO-0012 尚未做真实上传 smoke test；当前环境没有运行中的数据库和接口服务，后续可在 TODO-0014 补充接口级验证。
+- 2026-05-30：TODO-0013 执行 `pnpm --filter ./web-admin build` 通过，仅剩体积 warning。
+- 2026-05-30：TODO-0013 执行 `pnpm --filter ./web-h5 build` 通过，有体积 warning。
+- 2026-05-30：TODO-0013 执行 `git diff --check` 通过。
 
 ## 下一步
 
-继续处理 P2 前端已有体验和状态问题，优先 TODO-0013；或先推进 TODO-0014 建立最小验证体系。
+继续处理 TODO-0014，建立最小验证体系。
