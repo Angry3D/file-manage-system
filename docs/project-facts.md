@@ -51,12 +51,17 @@
 - 根 `package.json` 提供 `verify`、`verify:lock`、`verify:server`、`verify:web-admin`、`verify:web-h5` 和 `audit:prod` 脚本。
 - `docs/verification.md` 记录最小验证体系、分项验证、安全审计和当前已知限制。
 - 根 `.npmrc` 显式配置 `node-linker=hoisted` 和 `shared-workspace-lockfile=true`，用于兼容 ThinkJS 3、Vue CLI 3/4 等老工具链的依赖解析。
+- 根 `package.json` 通过 `pnpm.overrides` 定向覆盖 ThinkJS 间接链路中的 `validator`、`ms` 和 `uuid`，用于降低 `think-validator`、`think-helper`、`think-ms` 相关生产依赖漏洞风险。
+- 服务端 `server/package.json` 当前要求 Node.js `>=14.15.0`，以匹配 `sharp@0.32.6` 的运行时要求。
 - 2026-05-30 执行 `pnpm install --lockfile-only --frozen-lockfile` 通过，统一锁文件与 workspace 配置一致。
 - 2026-05-30 执行 `pnpm audit --prod` 后发现生产依赖漏洞 40 个，严重度为 17 high、21 moderate、2 low；高风险路径包括 `server>sharp`、`server>sharp>tar`、`server>thinkjs>think-validator>validator`、`web-admin>axios`、`web-h5>axios`。
 - 2026-05-30 完成前端依赖安全升级第一批：`web-admin` 和 `web-h5` 的 `axios` 升级到 `^1.16.1`，`vue` 与 `vue-template-compiler` 显式对齐到 `2.7.16`。
 - 2026-05-30 `web-h5` 将 `@moohng/postcss-px2vw` 固定为 `1.0.2`，以匹配 Vue CLI 4 当前 PostCSS 7 构建链路。
 - 2026-05-30 `web-h5/vue.config.js` 显式指定 PostCSS 配置路径为子项目目录，以兼容 pnpm hoisted node_modules 布局下的 Vant CSS 构建。
 - 2026-05-30 前端第一批依赖升级后再次执行 `pnpm audit --prod`，生产依赖漏洞降至 15 个，严重度为 8 high、6 moderate、1 low；剩余路径主要在服务端 `sharp/tar`、ThinkJS 间接依赖 `validator/ms/uuid` 和 Vue 2 自身 low 漏洞。
+- 2026-05-30 完成服务端剩余生产依赖漏洞处理：`server` 的 `sharp` 升级到 `^0.32.6`，旧 `sharp>tar` 链路移除；ThinkJS 间接依赖 `validator/ms/uuid` 通过定向 `pnpm.overrides` 解析到修复版本。
+- 2026-05-30 服务端剩余生产依赖漏洞处理后，`pnpm audit --prod` 仅剩 Vue 2 自身 low 漏洞；`pnpm audit --prod --audit-level moderate` 通过。
+- Vue 2 low 漏洞需要通过 Vue 3 大版本迁移才能消除，当前仅记录风险说明，不纳入本阶段低破坏面治理。
 
 ## 推断事实
 
@@ -64,6 +69,7 @@
 - 当前核心可用业务链路是：管理端登录 -> 图片上传 -> 图片新增/编辑/状态管理/删除 -> H5 照片墙展示。
 - 当前项目更偏个人/家庭照片管理场景；部分配置包含本机路径和线上域名，部署前需要按环境确认。
 - 当前依赖安全治理已有可重复锁文件基础；后续安全升级应基于 `pnpm-lock.yaml` 对比变更。
+- 当前生产依赖高/中风险审计已经清理到 moderate 阈值通过；剩余 Vue 2 low 风险属于框架大版本迁移边界。
 
 ## 待确认事项
 
@@ -144,11 +150,12 @@
 - `pnpm install`：按统一锁文件安装所有 workspace 依赖。
 - `pnpm install --lockfile-only --frozen-lockfile`：校验 `pnpm-lock.yaml` 与 workspace 配置一致。
 - `pnpm audit --prod`：审计生产依赖漏洞。
+- `pnpm audit --prod --audit-level moderate`：按 moderate 及以上严重度审计生产依赖漏洞；当前应通过。
 - `pnpm lint`：递归执行存在的 `lint` 脚本。
 - `pnpm build`：递归执行存在的 `build` 脚本。
 - `pnpm test`：递归执行存在的 `test` 脚本。
 - `pnpm run verify`：执行当前最小验证体系。
-- `pnpm run audit:prod`：审计生产依赖漏洞；当前存在已知剩余漏洞，命令会返回非 0。
+- `pnpm run audit:prod`：审计生产依赖漏洞；当前因 Vue 2 low 漏洞返回非 0。
 - `pnpm --filter server <script>`：只在服务端执行脚本。
 - `pnpm --filter web-front <script>`：只在管理端执行脚本。
 - `pnpm --filter web-h5 <script>`：只在 H5 端执行脚本。
