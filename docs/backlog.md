@@ -42,7 +42,6 @@
 | TODO-0004 | candidate | docs | 补充各端使用说明和项目文档。 | `README.md` 说明 | 根 README 写明“很多用法介绍没来得及写 README，后面会陆续补充”。 | 可优先补运行环境、启动命令、配置项和部署流程。 |
 | TODO-0005 | todo | refactor | 完善当前项目已有功能，优先围绕已实现的图片管理和展示能力做质量提升。 | 用户明确本次任务目标 | 用户说明“本次任务的核心目标是完善当前项目的已有功能，而不是做新功能迭代”。 | 阶段一已归档；后续继续避免扩展到视频、文档、Flutter 等新功能。 |
 | TODO-0015 | candidate | research | P3 TypeScript 渐进迁移评估，暂不作为本轮实施主线。 | 用户关于 TS 的疑问；项目通读 | 当前项目是 Vue 2 + ThinkJS 3 + 老 Vue CLI，多处依赖较旧；本轮目标是完善已有功能和依赖安全治理。 | 结论倾向暂缓；更适合在依赖安全稳定后，结合 Vue 3/Vite 或框架升级再评估。 |
-| TODO-0016 | done | chore | P1 依赖安全升级第二批：评估并处理服务端剩余生产依赖漏洞。 | TODO-0010 后续审计结果 | `pnpm audit --prod` 曾剩余 15 个生产依赖漏洞，主要路径为 `server>sharp`、`server>sharp>tar`、`server>thinkjs>think-validator>validator`、`server>think-cache>think-helper>ms/uuid`，另有 Vue 2 自身 low 漏洞需通过框架大版本升级才能消除。 | 已升级 `sharp` 并通过定向 `pnpm.overrides` 处理 ThinkJS 间接依赖高/中风险；`pnpm audit --prod --audit-level moderate` 已通过，`pnpm run audit:prod` 仍因 Vue 2 low 漏洞返回非 0；等待用户确认或明确要求后再归档。 |
 
 ## 维护规则
 
