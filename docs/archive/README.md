@@ -31,6 +31,7 @@ YYYY-MM-DD-short-stage-name.md
 | --- | --- | --- | --- |
 | 2026-05-30 | [2026-05-30-image-quality-dependency-governance.md](2026-05-30-image-quality-dependency-governance.md) | TODO-0006, TODO-0007, TODO-0008, TODO-0009, TODO-0010, TODO-0011, TODO-0012, TODO-0013, TODO-0014 | 图片链路质量提升与依赖治理 |
 | 2026-05-30 | [2026-05-30-service-production-audit.md](2026-05-30-service-production-audit.md) | TODO-0016 | 服务端生产依赖漏洞治理 |
+| 2026-05-30 | [2026-05-30-project-usage-documentation.md](2026-05-30-project-usage-documentation.md) | TODO-0004 | 项目使用说明补充 |
 
 
 ## 工作流
