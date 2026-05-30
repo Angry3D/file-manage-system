@@ -203,7 +203,8 @@ export default {
           .setImage({
             id: this.editForm.id,
             image: images[0].url,
-            image_thumb: images[0].urlThumb,
+            image_thumb: images[0].url_thumb,
+            image_id: images[0].id,
             status: this.form.status,
             place: this.form.place,
             note: this.form.note

@@ -50,6 +50,8 @@ module.exports = class extends Base {
       })
       .update({
         image: params.image,
+        image_thumb: params.image_thumb,
+        image_id: params.image_id,
         status: params.status,
         place: params.place,
         note: params.note
