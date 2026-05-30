@@ -48,6 +48,8 @@
 - 2026-05-30 已建立 pnpm workspace 基线：根目录包含 `package.json`、`pnpm-workspace.yaml`、`.npmrc` 和统一 `pnpm-lock.yaml`。
 - pnpm workspace 当前纳入 `server/`、`web-admin/`、`web-h5/` 三个子项目。
 - 根 `package.json` 通过 `engines.pnpm` 声明 pnpm 版本范围为 `>=10 <11`，并提供递归 `build`、`lint`、`test` 脚本。
+- 根 `package.json` 提供 `verify`、`verify:lock`、`verify:server`、`verify:web-admin`、`verify:web-h5` 和 `audit:prod` 脚本。
+- `docs/verification.md` 记录最小验证体系、分项验证、安全审计和当前已知限制。
 - 根 `.npmrc` 显式配置 `node-linker=hoisted` 和 `shared-workspace-lockfile=true`，用于兼容 ThinkJS 3、Vue CLI 3/4 等老工具链的依赖解析。
 - 2026-05-30 执行 `pnpm install --lockfile-only --frozen-lockfile` 通过，统一锁文件与 workspace 配置一致。
 - 2026-05-30 执行 `pnpm audit --prod` 后发现生产依赖漏洞 40 个，严重度为 17 high、21 moderate、2 low；高风险路径包括 `server>sharp`、`server>sharp>tar`、`server>thinkjs>think-validator>validator`、`web-admin>axios`、`web-h5>axios`。
@@ -92,6 +94,7 @@
 - `pnpm-workspace.yaml`
 - `.npmrc`
 - `pnpm-lock.yaml`
+- `docs/verification.md`
 - `server/package.json`
 - `server/README.md`
 - `server/src/config/adapter.js`
@@ -144,6 +147,8 @@
 - `pnpm lint`：递归执行存在的 `lint` 脚本。
 - `pnpm build`：递归执行存在的 `build` 脚本。
 - `pnpm test`：递归执行存在的 `test` 脚本。
+- `pnpm run verify`：执行当前最小验证体系。
+- `pnpm run audit:prod`：审计生产依赖漏洞；当前存在已知剩余漏洞，命令会返回非 0。
 - `pnpm --filter server <script>`：只在服务端执行脚本。
 - `pnpm --filter web-front <script>`：只在管理端执行脚本。
 - `pnpm --filter web-h5 <script>`：只在 H5 端执行脚本。

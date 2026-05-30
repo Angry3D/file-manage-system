@@ -11,7 +11,7 @@
 
 ## 关联待办
 
-TODO-0005, TODO-0013
+TODO-0005, TODO-0014
 
 ## 当前计划
 
@@ -35,6 +35,7 @@ TODO-0005, TODO-0013
 | 外置服务端敏感和环境差异配置 | done | 已支持环境变量覆盖数据库连接、上传目录、文件访问地址、服务端端口和本地文件服务端口；数据库密码不再保留明文默认值。 |
 | 增强图片上传链路健壮性 | done | 写文件前会创建目标目录，并统一捕获图片处理和文件系统错误后返回业务错误。 |
 | 修复前端已有体验和状态问题 | done | 已修复登录校验、表格 loading、H5 分页、图片查看边界行为，并移除图片管理调试输出。 |
+| 建立最小验证体系 | done | 已新增根目录 `verify` 系列脚本和 `docs/verification.md`，覆盖锁文件、服务端语法、管理端构建和 H5 构建。 |
 | 实施修复或完善 | pending | 遵循现有项目风格。 |
 | 验证并记录结果 | pending | 使用项目已有命令或手工验证。 |
 
@@ -56,6 +57,7 @@ planned
 - 2026-05-30：服务端数据库密码不再保留明文默认值，后续本地或部署启动需要通过 `BABYLIFE_DB_PASSWORD` 注入非空密码。
 - 2026-05-30：TODO-0011 已提交为 `e76abd7 chore: externalize server environment config`，随后进入 TODO-0012。
 - 2026-05-30：TODO-0012 已提交为 `4ab45e4 fix: harden image upload processing`，随后进入 TODO-0013。
+- 2026-05-30：TODO-0013 已提交为 `c25d33d fix: polish frontend loading and image viewer states`，随后进入 TODO-0014。
 
 ## 阻塞项
 
@@ -85,7 +87,10 @@ planned
 - 2026-05-30：TODO-0013 执行 `pnpm --filter ./web-admin build` 通过，仅剩体积 warning。
 - 2026-05-30：TODO-0013 执行 `pnpm --filter ./web-h5 build` 通过，有体积 warning。
 - 2026-05-30：TODO-0013 执行 `git diff --check` 通过。
+- 2026-05-30：TODO-0014 执行 `pnpm install` 通过，pnpm 提示若要允许依赖构建脚本需运行 `pnpm approve-builds`。
+- 2026-05-30：TODO-0014 执行 `pnpm run verify` 通过；管理端和 H5 端构建均仅剩体积 warning。
+- 2026-05-30：TODO-0014 执行 `git diff --check` 通过。
 
 ## 下一步
 
-继续处理 TODO-0014，建立最小验证体系。
+当前阶段 TODO-0006 至 TODO-0014 已完成但未归档；等待用户体验确认或明确归档指令。
