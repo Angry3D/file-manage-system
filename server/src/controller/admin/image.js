@@ -7,18 +7,20 @@ module.exports = class extends Base {
     const params = this.post();
     const dbImage = think.dbAdmin("image");
     const nowTime = this.nowTime();
-    params.images.forEach(async i => {
-      await dbImage.add({
-        created_time: nowTime,
-        status: params.status,
-        place: params.place,
-        note: params.note,
-        image: i.url,
-        image_thumb: i.url_thumb,
-        image_id: i.id
-      });
-    });
-    return this.success(params.images.length);
+    const ids = await Promise.all(
+      params.images.map(i =>
+        dbImage.add({
+          created_time: nowTime,
+          status: params.status,
+          place: params.place,
+          note: params.note,
+          image: i.url,
+          image_thumb: i.url_thumb,
+          image_id: i.id
+        })
+      )
+    );
+    return this.success(ids.length);
   }
 
   async getListAction() {

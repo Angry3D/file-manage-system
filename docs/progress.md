@@ -11,7 +11,7 @@
 
 ## 关联待办
 
-TODO-0005, TODO-0008
+TODO-0005, TODO-0009
 
 ## 当前计划
 
@@ -31,6 +31,7 @@ TODO-0005, TODO-0008
 | 实施依赖安全升级第一批 | done | 已升级两个前端的 axios，显式对齐 Vue 2 最终补丁线，并修复 H5 PostCSS 构建兼容问题。 |
 | 修复管理端删除图片接口响应 | done | `deleteAction` 删除后返回 `this.success(count)`，其中 `count` 为数据库删除行数。 |
 | 修复编辑图片字段同步 | done | 替换图片时前端提交 `image_thumb` 和 `image_id`，服务端同步更新原图、缩略图和上传图片 ID。 |
+| 修复新增多图写入等待 | done | `addAction` 使用 `Promise.all` 等待所有图片记录写入完成后返回实际写入数量。 |
 | 实施修复或完善 | pending | 遵循现有项目风格。 |
 | 验证并记录结果 | pending | 使用项目已有命令或手工验证。 |
 
@@ -47,6 +48,7 @@ planned
 - 2026-05-30：TODO-0010 第一批安全升级聚焦两个前端，暂不在同一批次升级服务端 `sharp` 或 ThinkJS 间接依赖，避免把服务端运行时约束变化混入低破坏面升级。
 - 2026-05-30：TODO-0010 已提交为 `1f015a3 chore: upgrade frontend security dependencies`，随后进入 TODO-0007。
 - 2026-05-30：TODO-0007 已提交为 `cdc4286 fix: return success response after image delete`，随后进入 TODO-0008。
+- 2026-05-30：TODO-0008 已提交为 `e9d8b32 fix: sync image thumbnail fields on edit`，随后进入 TODO-0009。
 
 ## 阻塞项
 
@@ -66,7 +68,9 @@ planned
 - 2026-05-30：TODO-0008 执行 `node --check server/src/controller/admin/image.js` 通过。
 - 2026-05-30：TODO-0008 执行 `pnpm --filter ./web-admin build` 通过，有既有 `no-console` 和体积 warning。
 - 2026-05-30：TODO-0008 执行 `git diff --check` 通过。
+- 2026-05-30：TODO-0009 执行 `node --check server/src/controller/admin/image.js` 通过。
+- 2026-05-30：TODO-0009 执行 `git diff --check` 通过。
 
 ## 下一步
 
-继续处理图片管理核心链路 P0 问题，优先 TODO-0009。
+继续处理 P1 问题，优先 TODO-0011 或 TODO-0012。
