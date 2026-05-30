@@ -27,6 +27,7 @@
 - 图片上传记录写入 `admin_upload_image` 语义的模型表，字段包含原文件名、相对路径、缩略图相对路径。
 - 管理端图片记录写入 `admin_image` 语义的模型表，字段包含创建时间、展示状态、地点、备注、图片地址、缩略图地址和上传图片 ID。
 - 管理端图片列表支持按创建时间范围、展示状态、地点、备注筛选。
+- 管理端删除图片接口删除后返回统一成功响应，响应数据为数据库删除行数。
 - H5 照片墙只请求展示状态为 `1` 的图片，并按 `created_time DESC` 分页展示。
 - 管理端接口基础地址由 `web-admin/src/assets/js/env.js` 根据 `BUILD_ENV` 切换：开发环境 `http://localhost:20000/`，生产环境 `http://babyapi.relaxcoder.top/`。
 - H5 接口基础地址由 `web-h5/src/assets/js/env.js` 根据 `BUILD_ENV` 切换：开发环境 `http://localhost:20000/`，生产环境 `http://babyapi.relaxcoder.top/`。

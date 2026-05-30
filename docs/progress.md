@@ -11,7 +11,7 @@
 
 ## 关联待办
 
-TODO-0005, TODO-0010
+TODO-0005, TODO-0007
 
 ## 当前计划
 
@@ -29,6 +29,7 @@ TODO-0005, TODO-0010
 | 确认本阶段具体修复点 | done | 用户已确认落盘；优化集合已写入 `docs/backlog.md` 的 TODO-0006 至 TODO-0015。 |
 | 建立依赖治理基线 | done | 已引入 pnpm workspace、根 package、hoisted 配置和统一锁文件。 |
 | 实施依赖安全升级第一批 | done | 已升级两个前端的 axios，显式对齐 Vue 2 最终补丁线，并修复 H5 PostCSS 构建兼容问题。 |
+| 修复管理端删除图片接口响应 | done | `deleteAction` 删除后返回 `this.success(count)`，其中 `count` 为数据库删除行数。 |
 | 实施修复或完善 | pending | 遵循现有项目风格。 |
 | 验证并记录结果 | pending | 使用项目已有命令或手工验证。 |
 
@@ -43,6 +44,7 @@ planned
 - 2026-05-30：pnpm workspace 基线采用 `node-linker=hoisted`，优先兼容 ThinkJS 3、Vue CLI 3/4 等老工具链，再逐步做依赖安全升级。
 - 2026-05-30：TODO-0006 已提交为 `341c391 chore: add pnpm workspace dependency baseline`，随后进入 TODO-0010。
 - 2026-05-30：TODO-0010 第一批安全升级聚焦两个前端，暂不在同一批次升级服务端 `sharp` 或 ThinkJS 间接依赖，避免把服务端运行时约束变化混入低破坏面升级。
+- 2026-05-30：TODO-0010 已提交为 `1f015a3 chore: upgrade frontend security dependencies`，随后进入 TODO-0007。
 
 ## 阻塞项
 
@@ -57,7 +59,9 @@ planned
 - 2026-05-30：TODO-0010 后执行 `pnpm audit --prod`，生产依赖漏洞降至 15 个，严重度为 8 high、6 moderate、1 low；命令因剩余漏洞返回非 0。
 - 2026-05-30：执行 `pnpm --filter ./web-admin build` 通过，有既有 `no-console` 和体积 warning。
 - 2026-05-30：执行 `pnpm --filter ./web-h5 build` 通过，有体积 warning。
+- 2026-05-30：TODO-0007 执行 `node --check server/src/controller/admin/image.js` 通过。
+- 2026-05-30：TODO-0007 执行 `git diff --check` 通过。
 
 ## 下一步
 
-继续处理图片管理核心链路 P0 问题，优先 TODO-0007；服务端剩余依赖漏洞已登记到 TODO-0016，后续单独评估。
+继续处理图片管理核心链路 P0 问题，优先 TODO-0008。

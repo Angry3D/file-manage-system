@@ -90,11 +90,12 @@ module.exports = class extends Base {
 
   async deleteAction() {
     const params = this.post();
-    await think
+    const count = await think
       .dbAdmin("image")
       .where({
         id: ["IN", params.ids]
       })
       .delete();
+    return this.success(count);
   }
 };
