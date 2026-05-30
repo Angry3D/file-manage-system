@@ -9,7 +9,7 @@
 
 ## 编号规则
 
-下一个待办 ID：TODO-0016
+下一个待办 ID：TODO-0017
 
 新增待办时使用上面的 ID，然后递增该值。不要依赖历史归档中的最大编号来推断下一个 ID。
 
@@ -45,12 +45,13 @@
 | TODO-0007 | todo | bug | P0 修复管理端删除图片接口无成功响应。 | 项目通读 | `server/src/controller/admin/image.js` 的 `deleteAction` 删除后没有返回 `this.success()`，管理端删除流程依赖 Promise 完成后刷新列表。 | 影响已有图片管理核心链路。 |
 | TODO-0008 | todo | bug | P0 修复编辑图片时缩略图和上传图片 ID 不同步更新。 | 项目通读 | `web-admin/src/views/file/image/ImageAdd.vue` 编辑提交了 `image_thumb`，但 `server/src/controller/admin/image.js` 的 `setAction` 未更新 `image_thumb` 和 `image_id`。 | 替换图片后列表/H5 可能仍显示旧缩略图。 |
 | TODO-0009 | todo | bug | P0 修复新增多张图片时未等待所有数据库写入完成。 | 项目通读 | `server/src/controller/admin/image.js` 的 `addAction` 使用 `params.images.forEach(async ...)` 后立即返回成功。 | 可能导致响应成功时图片记录尚未全部写入。 |
-| TODO-0010 | todo | optimization | P1 依赖安全升级第一批：优先低破坏面依赖。 | 用户关于 GitHub 安全漏洞提示的疑问；项目通读；公开安全信息 | `web-admin` 和 `web-h5` 使用 `axios@^0.19.0`；两个前端使用 Vue 2；依赖整体多年未更新。 | 在 TODO-0006 完成后执行；优先处理 `axios`、Vue 2 最终补丁线、`vue-template-compiler` 对齐及明显过旧构建依赖，不做一次性大跨度全量升级。 |
+| TODO-0010 | done | optimization | P1 依赖安全升级第一批：优先低破坏面依赖。 | 用户关于 GitHub 安全漏洞提示的疑问；项目通读；公开安全信息 | `web-admin` 和 `web-h5` 已将 `axios` 升级到 `^1.16.1`，并将 `vue` / `vue-template-compiler` 对齐到 `2.7.16`；`web-h5` 固定 `@moohng/postcss-px2vw@1.0.2` 并显式指定 PostCSS 配置目录。 | 第一批已完成；`pnpm audit --prod` 从 40 个生产依赖漏洞降到 15 个，等待用户确认或明确要求后再归档。 |
 | TODO-0011 | todo | chore | P1 服务端配置安全治理：外置敏感配置和环境差异配置。 | 项目通读 | `server/src/config/adapter.js` 存在明文数据库连接信息；`server/src/config/define.js` 和 `server/script/file-server.sh` 存在本机绝对路径和固定域名。 | 兼容现有本地启动方式，建议提供环境变量默认值或本地配置模板。 |
 | TODO-0012 | todo | bug | P1 增强图片上传链路健壮性。 | 项目通读 | `server/src/controller/common/upload.js` 写文件前未确保目标目录存在，也没有统一捕获 Sharp 或文件系统错误。 | 首次部署、目录缺失或图片处理异常时应返回明确错误。 |
 | TODO-0013 | todo | bug | P2 修复前端已有体验和状态问题。 | 项目通读 | `Login.vue` 的用户名表单 `prop` 拼写为 `accout`；`XTable.vue` 请求失败时 loading 可能不恢复；`web-h5/src/components/XList.vue` 存在 `defautl` 拼写和分页完成判断问题；`ImageView.vue` 边界提示与循环行为不一致。 | 可作为 P0/P1 完成后的集中小修。 |
 | TODO-0014 | todo | chore | P2 建立最小验证体系，保证后续修复和依赖升级可验证。 | 项目通读；本地命令检查 | 现有脚本包含服务端 `test/lint`、前端 `lint/build`，但尚未确认当前环境可跑；`web-admin/README.md` 提到 `npm run test` 但 package 未定义测试脚本。 | 至少沉淀可执行的安装、lint、build、服务端 smoke test 或接口级验证流程。 |
 | TODO-0015 | candidate | research | P3 TypeScript 渐进迁移评估，暂不作为本轮实施主线。 | 用户关于 TS 的疑问；项目通读 | 当前项目是 Vue 2 + ThinkJS 3 + 老 Vue CLI，多处依赖较旧；本轮目标是完善已有功能和依赖安全治理。 | 结论倾向暂缓；更适合在依赖安全稳定后，结合 Vue 3/Vite 或框架升级再评估。 |
+| TODO-0016 | todo | chore | P1 依赖安全升级第二批：评估并处理服务端剩余生产依赖漏洞。 | TODO-0010 后续审计结果 | `pnpm audit --prod` 剩余 15 个生产依赖漏洞，主要路径为 `server>sharp`、`server>sharp>tar`、`server>thinkjs>think-validator>validator`、`server>think-cache>think-helper>ms/uuid`，另有 Vue 2 自身 low 漏洞需通过框架大版本升级才能消除。 | 需要单独评估 `sharp >=0.32.6` 对 Node 运行时和部署环境的影响；ThinkJS 间接依赖可能需要 overrides、框架升级或接受风险。 |
 
 ## 维护规则
 

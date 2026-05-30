@@ -11,7 +11,7 @@
 
 ## 关联待办
 
-TODO-0005, TODO-0006
+TODO-0005, TODO-0010
 
 ## 当前计划
 
@@ -28,6 +28,7 @@ TODO-0005, TODO-0006
 | 盘点已有图片管理/展示链路 | done | 已覆盖 `server/`、`web-admin/`、`web-h5/`，客观事实已补充到 `docs/project-facts.md`。 |
 | 确认本阶段具体修复点 | done | 用户已确认落盘；优化集合已写入 `docs/backlog.md` 的 TODO-0006 至 TODO-0015。 |
 | 建立依赖治理基线 | done | 已引入 pnpm workspace、根 package、hoisted 配置和统一锁文件。 |
+| 实施依赖安全升级第一批 | done | 已升级两个前端的 axios，显式对齐 Vue 2 最终补丁线，并修复 H5 PostCSS 构建兼容问题。 |
 | 实施修复或完善 | pending | 遵循现有项目风格。 |
 | 验证并记录结果 | pending | 使用项目已有命令或手工验证。 |
 
@@ -40,6 +41,8 @@ planned
 - 2026-05-30：用户明确 `TODO-0001` 到 `TODO-0003` 暂缓，本次核心目标是完善已有功能，而不是做新功能迭代。
 - 2026-05-30：针对 TS、pnpm、GitHub 安全漏洞提示的疑问，确认本轮优先建立依赖治理基线并处理依赖安全与已有功能问题；TypeScript 仅作为后续研究项，不进入本轮实施主线。
 - 2026-05-30：pnpm workspace 基线采用 `node-linker=hoisted`，优先兼容 ThinkJS 3、Vue CLI 3/4 等老工具链，再逐步做依赖安全升级。
+- 2026-05-30：TODO-0006 已提交为 `341c391 chore: add pnpm workspace dependency baseline`，随后进入 TODO-0010。
+- 2026-05-30：TODO-0010 第一批安全升级聚焦两个前端，暂不在同一批次升级服务端 `sharp` 或 ThinkJS 间接依赖，避免把服务端运行时约束变化混入低破坏面升级。
 
 ## 阻塞项
 
@@ -50,7 +53,11 @@ planned
 - 2026-05-30：已完成项目通读和静态盘点。已完成阶段见 `docs/archive/README.md`。
 - 2026-05-30：执行 `pnpm install --lockfile-only` 成功生成统一 `pnpm-lock.yaml`；执行 `pnpm install --lockfile-only --frozen-lockfile` 通过。
 - 2026-05-30：执行 `pnpm audit --prod` 建立安全审计基线，发现生产依赖漏洞 40 个，严重度为 17 high、21 moderate、2 low；命令因发现漏洞返回非 0，后续进入 TODO-0010 处理。
+- 2026-05-30：TODO-0010 后执行 `pnpm install --lockfile-only --frozen-lockfile` 通过。
+- 2026-05-30：TODO-0010 后执行 `pnpm audit --prod`，生产依赖漏洞降至 15 个，严重度为 8 high、6 moderate、1 low；命令因剩余漏洞返回非 0。
+- 2026-05-30：执行 `pnpm --filter ./web-admin build` 通过，有既有 `no-console` 和体积 warning。
+- 2026-05-30：执行 `pnpm --filter ./web-h5 build` 通过，有体积 warning。
 
 ## 下一步
 
-继续处理 TODO-0010，基于统一锁文件优先升级低破坏面的安全依赖；暂不归档 TODO-0006，等待用户确认或明确要求。
+继续处理图片管理核心链路 P0 问题，优先 TODO-0007；服务端剩余依赖漏洞已登记到 TODO-0016，后续单独评估。

@@ -43,6 +43,10 @@
 - 根 `.npmrc` 显式配置 `node-linker=hoisted` 和 `shared-workspace-lockfile=true`，用于兼容 ThinkJS 3、Vue CLI 3/4 等老工具链的依赖解析。
 - 2026-05-30 执行 `pnpm install --lockfile-only --frozen-lockfile` 通过，统一锁文件与 workspace 配置一致。
 - 2026-05-30 执行 `pnpm audit --prod` 后发现生产依赖漏洞 40 个，严重度为 17 high、21 moderate、2 low；高风险路径包括 `server>sharp`、`server>sharp>tar`、`server>thinkjs>think-validator>validator`、`web-admin>axios`、`web-h5>axios`。
+- 2026-05-30 完成前端依赖安全升级第一批：`web-admin` 和 `web-h5` 的 `axios` 升级到 `^1.16.1`，`vue` 与 `vue-template-compiler` 显式对齐到 `2.7.16`。
+- 2026-05-30 `web-h5` 将 `@moohng/postcss-px2vw` 固定为 `1.0.2`，以匹配 Vue CLI 4 当前 PostCSS 7 构建链路。
+- 2026-05-30 `web-h5/vue.config.js` 显式指定 PostCSS 配置路径为子项目目录，以兼容 pnpm hoisted node_modules 布局下的 Vant CSS 构建。
+- 2026-05-30 前端第一批依赖升级后再次执行 `pnpm audit --prod`，生产依赖漏洞降至 15 个，严重度为 8 high、6 moderate、1 low；剩余路径主要在服务端 `sharp/tar`、ThinkJS 间接依赖 `validator/ms/uuid` 和 Vue 2 自身 low 漏洞。
 
 ## 推断事实
 

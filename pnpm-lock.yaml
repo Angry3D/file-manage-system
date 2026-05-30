@@ -75,8 +75,8 @@ importers:
   web-admin:
     dependencies:
       axios:
-        specifier: ^0.19.0
-        version: 0.19.2
+        specifier: ^1.16.1
+        version: 1.16.1
       core-js:
         specifier: ^2.6.5
         version: 2.6.12
@@ -90,7 +90,7 @@ importers:
         specifier: ^4.0.2
         version: 4.7.0(vue@2.7.16)
       vue:
-        specifier: ^2.6.10
+        specifier: 2.7.16
         version: 2.7.16
       vue-router:
         specifier: ^3.0.3
@@ -124,14 +124,14 @@ importers:
         specifier: ^4.1.0
         version: 4.1.0(less@3.13.1)(webpack@4.47.0)
       vue-template-compiler:
-        specifier: ^2.6.10
+        specifier: 2.7.16
         version: 2.7.16
 
   web-h5:
     dependencies:
       axios:
-        specifier: ^0.19.0
-        version: 0.19.2
+        specifier: ^1.16.1
+        version: 1.16.1
       core-js:
         specifier: ^3.4.3
         version: 3.49.0
@@ -145,7 +145,7 @@ importers:
         specifier: ^2.2.16
         version: 2.13.9(vue@2.7.16)
       vue:
-        specifier: ^2.6.10
+        specifier: 2.7.16
         version: 2.7.16
       vue-router:
         specifier: ^3.1.3
@@ -159,7 +159,7 @@ importers:
     devDependencies:
       '@moohng/postcss-px2vw':
         specifier: ^1.0.2
-        version: 1.2.0(postcss@8.5.15)
+        version: 1.0.2
       '@vue/cli-plugin-babel':
         specifier: ^4.1.0
         version: 4.5.19(@vue/cli-service@4.5.19(@vue/compiler-sfc@3.5.35)(babel-core@6.26.3)(less-loader@5.0.0(less@3.13.1)(webpack@4.47.0))(lodash@4.18.1)(nunjucks@3.2.4(chokidar@3.6.0))(vue-template-compiler@2.7.16)(vue@2.7.16))(core-js@3.49.0)(vue@2.7.16)
@@ -191,7 +191,7 @@ importers:
         specifier: ^5.0.0
         version: 5.0.0(less@3.13.1)(webpack@4.47.0)
       vue-template-compiler:
-        specifier: ^2.6.10
+        specifier: 2.7.16
         version: 2.7.16
 
 packages:
@@ -860,10 +860,8 @@ packages:
   '@leichtgewicht/ip-codec@2.0.5':
     resolution: {integrity: sha512-Vo+PSpZG2/fmgmiNzYK9qWRh8h/CHrwD0mo1h1DzL4yzHNSfWYujGTYsWGreD000gcgmZ7K4Ys6Tx9TxtsKdDw==}
 
-  '@moohng/postcss-px2vw@1.2.0':
-    resolution: {integrity: sha512-UWT8ZsWsyY94zMvsgMEF1g8akVG69xqWFYF4qlKQtUvkxg12URfcJlhSDgE34vqU/U3mm7ZYcDLlpdCZn0jRXQ==}
-    peerDependencies:
-      postcss: ^8.3.6
+  '@moohng/postcss-px2vw@1.0.2':
+    resolution: {integrity: sha512-RKCf+iAuktDi49KatPyHj7gNpXCywPyLdA56EN8irIK3TYpEHEaA5T954jDRbeIi6aty9JXyxxkqeocohaHABA==}
 
   '@mrmlnc/readdir-enhanced@2.2.1':
     resolution: {integrity: sha512-bPHp6Ji8b41szTOcaP63VlnbbO5Ny6dwAATtY6JTjh5N2OLrb5Qk/Th5cRkRQhkWCt+EJsYrNB0MiL+Gpn6e3g==}
@@ -1272,6 +1270,10 @@ packages:
     resolution: {integrity: sha512-4B/qKCfeE/ODUaAUpSwfzazo5x29WD4r3vXiWsB7I2mSDAihwEqKO+g8GELZUQSSAo5e1XTYh3ZVfLyxBc12nA==}
     engines: {node: '>= 10.0.0'}
 
+  agent-base@6.0.2:
+    resolution: {integrity: sha512-RZNwNclF7+MS/8bDg70amg32dyeZGZxiDuQmZxKLAlQjr3jGyLx+4Kkk58UO7D2QdgFIQCovuSuZESne6RG6XQ==}
+    engines: {node: '>= 6.0.0'}
+
   ajv-errors@1.0.1:
     resolution: {integrity: sha512-DCRfO/4nQ+89p/RK43i8Ezd41EqdGIU4ld7nGF8OQ14oc/we5rEntLCUa7+jrn3nn83BosfwZA0wb4pon2o8iQ==}
     peerDependencies:
@@ -1531,9 +1533,8 @@ packages:
   aws4@1.13.2:
     resolution: {integrity: sha512-lHe62zvbTB5eEABUVi/AwVh0ZKY9rMMDhmm+eeyuuUQbQ3+J+fONVQOZyj+DdrvD4BY33uYniyRJ4UJIaSKAfw==}
 
-  axios@0.19.2:
-    resolution: {integrity: sha512-fjgm5MvRHLhx+osE2xoekY70AhARk3a6hkN+3Io1jc00jtquGvxYlKlsFUhmUET0V5te6CcZI7lcv2Ym61mjHA==}
-    deprecated: Critical security vulnerability fixed in v0.21.1. For more information, see https://github.com/axios/axios/pull/3410
+  axios@1.16.1:
+    resolution: {integrity: sha512-caYkukvroVPO8KrzuJEb50Hm07KwfBZPEC3VeFHTsqWHvKTsy54hjJz9BS/cdaypROE2rH6xvm9mHX4fgWkr3A==}
 
   babel-code-frame@6.26.0:
     resolution: {integrity: sha512-XqYMR2dfdGMW+hd0IUZ2PwK+fGeFkOxZJ0wY+JaQAHzt1Zx8LcvpiZD2NiGkEG8qx0CfkAOr5xt76d1e8vG90g==}
@@ -2593,14 +2594,6 @@ packages:
       supports-color:
         optional: true
 
-  debug@3.1.0:
-    resolution: {integrity: sha512-OX8XqP7/1a9cqkxYw2yXss15f26NKWBpDXQd0/uK/KPqdQhxbPa994hnzjcE2VqQpDslf55723cKPUOGSmMY3g==}
-    peerDependencies:
-      supports-color: '*'
-    peerDependenciesMeta:
-      supports-color:
-        optional: true
-
   debug@3.2.7:
     resolution: {integrity: sha512-CFjzYYAi4ThfiQvizrFQevTTXHtnCqWfe7x1AhgEscTz6ZbLbfoLRLPugTQyBth6f8ZERVUSyWHFD/7Wu4t1XQ==}
     peerDependencies:
@@ -3331,10 +3324,6 @@ packages:
       debug:
         optional: true
 
-  follow-redirects@1.5.10:
-    resolution: {integrity: sha512-0V5l4Cizzvqt5D44aTXbFZz+FtyXV1vrDN6qrelxtfYQKW0KO0W2T/hkE8xvGa/540LkZlkaUjO4ailYTFtHVQ==}
-    engines: {node: '>=4.0'}
-
   for-each@0.3.5:
     resolution: {integrity: sha512-dKx12eRCVIzqCxFGplyFKJMPvLEWgmNtUrpTiJIR5u97zEhRG8ySrtboPHZXx7daLxQVrl643cTzbab2tkQjxg==}
     engines: {node: '>= 0.4'}
@@ -3353,6 +3342,10 @@ packages:
   form-data@2.3.3:
     resolution: {integrity: sha512-1lLKB2Mu3aGP1Q/2eCOx0fNbRMe7XdwktwOruhfqqd0rIJWwN4Dh+E3hrPSlDCXnSR7UtZ1N38rVXm+6+MEhJQ==}
     engines: {node: '>= 0.12'}
+
+  form-data@4.0.5:
+    resolution: {integrity: sha512-8RipRLol37bNs2bhoV67fiTEvdTrbMUYcFTiy3+wuuOnUog2QBHCZWXDRijWQfAkhBj2Uf5UnVaiWwA5vdd82w==}
+    engines: {node: '>= 6'}
 
   formidable@1.2.6:
     resolution: {integrity: sha512-KcpbcpuLNOwrEjnbpMC0gS+X8ciDoZE1kkqzat4a8vrprf+s9pKNQ/QIwWfbfs4ltgmFl3MD177SNTkve3BwGQ==}
@@ -3731,6 +3724,10 @@ packages:
 
   https-browserify@1.0.0:
     resolution: {integrity: sha512-J+FkSdyD+0mA0N+81tMotaRMfSL9SGi+xpD3T6YApKsc3bGSXJlfXri3VyFOeYkfLRQisDk1W+jIFFKBeUBbBg==}
+
+  https-proxy-agent@5.0.1:
+    resolution: {integrity: sha512-dFcAjpTQFgoLMzC2VwU+C/CbS7uRL0lWmxDITmqm7C+7F0Odmj6s9l6alZc6AELXhrnggM2CeWSXHGOdX2YtwA==}
+    engines: {node: '>= 6'}
 
   human-signals@1.1.1:
     resolution: {integrity: sha512-SEQu7vl8KjNL2eoGBLF3+wAjpsNfA9XMlXAYj/3EdaNfAlxKthD1xjEQfGOUhllCGGJVNY34bRr6lPINhNjyZw==}
@@ -5563,6 +5560,10 @@ packages:
   proxy-addr@2.0.7:
     resolution: {integrity: sha512-llQsMLSUDUPT44jdrU/O37qlnifitDP+ZwrmmZcoSKyLKvtZxpyV0n2/bD/N4tBAAZ/gJEdZU7KMraoK1+XYAg==}
     engines: {node: '>= 0.10'}
+
+  proxy-from-env@2.1.0:
+    resolution: {integrity: sha512-cJ+oHTW1VAEa8cJslgmUZrc+sjRKgAKl3Zyse6+PV38hZe/V6Z14TbCuXcan9F9ghlz4QrFr2c92TNF82UkYHA==}
+    engines: {node: '>=10'}
 
   prr@1.0.1:
     resolution: {integrity: sha512-yPw4Sng1gWghHQWj0B3ZggWUm4qVbPwPFcRG8KyxiU7J2OHFSoEHKS+EZ3fv5l1t9CyCiop6l/ZYeWbrgoQejw==}
@@ -8125,9 +8126,10 @@ snapshots:
 
   '@leichtgewicht/ip-codec@2.0.5': {}
 
-  '@moohng/postcss-px2vw@1.2.0(postcss@8.5.15)':
+  '@moohng/postcss-px2vw@1.0.2':
     dependencies:
-      postcss: 8.5.15
+      object-assign: 4.1.1
+      postcss: 7.0.39
 
   '@mrmlnc/readdir-enhanced@2.2.1':
     dependencies:
@@ -8999,6 +9001,12 @@ snapshots:
 
   address@1.2.2: {}
 
+  agent-base@6.0.2:
+    dependencies:
+      debug: 4.4.3(supports-color@6.1.0)
+    transitivePeerDependencies:
+      - supports-color
+
   ajv-errors@1.0.1(ajv@6.15.0):
     dependencies:
       ajv: 6.15.0
@@ -9329,10 +9337,14 @@ snapshots:
 
   aws4@1.13.2: {}
 
-  axios@0.19.2:
+  axios@1.16.1:
     dependencies:
-      follow-redirects: 1.5.10
+      follow-redirects: 1.16.0(debug@4.4.3)
+      form-data: 4.0.5
+      https-proxy-agent: 5.0.1
+      proxy-from-env: 2.1.0
     transitivePeerDependencies:
+      - debug
       - supports-color
 
   babel-code-frame@6.26.0:
@@ -10665,10 +10677,6 @@ snapshots:
     optionalDependencies:
       supports-color: 6.1.0
 
-  debug@3.1.0:
-    dependencies:
-      ms: 2.0.0
-
   debug@3.2.7(supports-color@6.1.0):
     dependencies:
       ms: 2.1.3
@@ -11631,12 +11639,6 @@ snapshots:
     optionalDependencies:
       debug: 4.4.3(supports-color@6.1.0)
 
-  follow-redirects@1.5.10:
-    dependencies:
-      debug: 3.1.0
-    transitivePeerDependencies:
-      - supports-color
-
   for-each@0.3.5:
     dependencies:
       is-callable: 1.2.7
@@ -11653,6 +11655,14 @@ snapshots:
     dependencies:
       asynckit: 0.4.0
       combined-stream: 1.0.8
+      mime-types: 2.1.35
+
+  form-data@4.0.5:
+    dependencies:
+      asynckit: 0.4.0
+      combined-stream: 1.0.8
+      es-set-tostringtag: 2.1.0
+      hasown: 2.0.4
       mime-types: 2.1.35
 
   formidable@1.2.6: {}
@@ -12102,6 +12112,13 @@ snapshots:
       sshpk: 1.18.0
 
   https-browserify@1.0.0: {}
+
+  https-proxy-agent@5.0.1:
+    dependencies:
+      agent-base: 6.0.2
+      debug: 4.4.3(supports-color@6.1.0)
+    transitivePeerDependencies:
+      - supports-color
 
   human-signals@1.1.1: {}
 
@@ -14063,6 +14080,8 @@ snapshots:
     dependencies:
       forwarded: 0.2.0
       ipaddr.js: 1.9.1
+
+  proxy-from-env@2.1.0: {}
 
   prr@1.0.1: {}
 
