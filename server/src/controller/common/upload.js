@@ -19,12 +19,16 @@ module.exports = class extends Base {
     if (!file) {
       return this.fail(201, failTip);
     }
-    // 目录信息
-    switch (folderName) {
-      case "image":
-        return this.processImage(file, folderName);
-      default:
-        break;
+    try {
+      switch (folderName) {
+        case "image":
+          return await this.processImage(file, folderName);
+        default:
+          return this.fail(201, failTip);
+      }
+    } catch (err) {
+      think.logger.error(err);
+      return this.fail(201, failTip + "，请检查上传目录或文件格式");
     }
   }
   async processImage(file, folderName) {
@@ -35,6 +39,8 @@ module.exports = class extends Base {
     let dbPathThumbnail =
       folderName + "/" + path.basename(file.path, extName) + "_thumb" + extName;
     let filePathThumbnail = path.join(Define.fileDir, dbPathThumbnail);
+    this.ensureDir(path.dirname(filePath));
+    this.ensureDir(path.dirname(filePathThumbnail));
     if (file.type === "image/gif") {
       dbPathThumbnail = dbPath;
       filePathThumbnail = filePath;
@@ -45,10 +51,11 @@ module.exports = class extends Base {
       const sharpImg = Sharp(file.path).rotate();
       const sharpImgMeta = await sharpImg.metadata();
       // origin image
-      await sharpImg.toFile(filePath);
+      await sharpImg.clone().toFile(filePath);
       // thumbnail imgage
       await sharpImg
-        .resize(Math.min(300, sharpImgMeta.width), null)
+        .clone()
+        .resize(Math.min(300, sharpImgMeta.width || 300), null)
         .toFile(filePathThumbnail);
     }
     // 压入信息到数据库
@@ -65,12 +72,27 @@ module.exports = class extends Base {
       id: imageID
     });
   }
+  ensureDir(dirPath) {
+    if (fs.existsSync(dirPath)) {
+      return;
+    }
+    this.ensureDir(path.dirname(dirPath));
+    try {
+      fs.mkdirSync(dirPath);
+    } catch (err) {
+      if (err.code !== "EEXIST") {
+        throw err;
+      }
+    }
+  }
   moveFile(srcPath, destPath) {
-    return new Promise(resolve => {
+    return new Promise((resolve, reject) => {
       const readStream = fs.createReadStream(srcPath);
       const writeStream = fs.createWriteStream(destPath);
       readStream.pipe(writeStream);
-      readStream.on("end", () => {
+      readStream.on("error", reject);
+      writeStream.on("error", reject);
+      writeStream.on("finish", () => {
         // fs.unlinkSync(srcPath);
         resolve();
       });

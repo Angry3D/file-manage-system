@@ -25,6 +25,7 @@
 - 服务端文件访问地址中，开发环境默认值为 `http://127.0.0.1:11000/`，生产环境默认值为 `http://file.relaxcoder.top/`，可通过 `BABYLIFE_FILE_HOST` 覆盖。
 - `server/script/file-server.sh` 默认使用 `live-server --port=11000 --no-browser /Users/relax/Documents/upload` 启动本地文件服务，端口和目录可分别通过 `BABYLIFE_FILE_SERVER_PORT`、`BABYLIFE_UPLOAD_DIR` 覆盖。
 - 图片上传接口在 `server/src/controller/common/upload.js` 中处理，非 GIF 图片会通过 Sharp 生成原图和缩略图，GIF 复用原图作为缩略图。
+- 图片上传写文件前会确保目标目录存在；Sharp 或文件系统错误会记录日志并返回统一上传失败业务错误。
 - 图片上传记录写入 `admin_upload_image` 语义的模型表，字段包含原文件名、相对路径、缩略图相对路径。
 - 管理端新增图片记录写入 `admin_image` 语义的模型表，字段包含创建时间、展示状态、地点、备注、图片地址、缩略图地址和上传图片 ID；新增多图时会等待所有数据库写入完成后返回实际写入数量。
 - 管理端编辑图片时会同步更新图片地址、缩略图地址和上传图片 ID。
