@@ -30,6 +30,31 @@ module.exports = class extends think.Logic {
       this.failErr("图片不能为空");
       return false;
     }
+    const images = this.post("images");
+    const hasInvalidImage = images.some(item => {
+      if (!item || typeof item !== "object") {
+        return true;
+      }
+      if (!item.url || !item.url_thumb) {
+        return true;
+      }
+      if (item.id === undefined || item.id === null || item.id === "") {
+        return true;
+      }
+      return false;
+    });
+    if (hasInvalidImage) {
+      this.failErr("图片参数非法");
+      return false;
+    }
+    const status = this.post("status");
+    if (
+      status !== Define.showStatus.show &&
+      status !== Define.showStatus.hide
+    ) {
+      this.failErr("状态参数非法");
+      return false;
+    }
   }
 
   getListAction() {
@@ -79,6 +104,15 @@ module.exports = class extends think.Logic {
         string: true,
         trim: true
       },
+      image_thumb: {
+        required: true,
+        string: true,
+        trim: true
+      },
+      image_id: {
+        required: true,
+        int: true
+      },
       status: {
         required: true,
         int: true
@@ -96,6 +130,14 @@ module.exports = class extends think.Logic {
     };
     if (!this.validate(rules)) {
       this.failParams();
+      return false;
+    }
+    const status = this.post("status");
+    if (
+      status !== Define.showStatus.show &&
+      status !== Define.showStatus.hide
+    ) {
+      this.failErr("状态参数非法");
       return false;
     }
   }

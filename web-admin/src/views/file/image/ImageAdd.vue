@@ -186,15 +186,20 @@ export default {
       if (this.mode == "add") {
         const params = Object.assign({ images }, this.form);
         this.okBtnLoading = true;
-        this.$api.addImage(params).then(() => {
-          this.$Message.success("添加成功");
-          setTimeout(() => {
-            this.$router.back();
-          }, 300);
-        });
+        this.$api
+          .addImage(params)
+          .then(() => {
+            this.$Message.success("添加成功");
+            setTimeout(() => {
+              this.$router.back();
+            }, 300);
+          })
+          .catch(() => {
+            this.okBtnLoading = false;
+          });
       } else if (this.mode == "edit") {
         if (!images.length) {
-          this.$$Message.error("请先添加一张图片");
+          this.$Message.error("请先添加一张图片");
           return;
         }
         this.okBtnLoading = true;
@@ -213,6 +218,9 @@ export default {
             setTimeout(() => {
               this.$router.back();
             }, 300);
+          })
+          .catch(() => {
+            this.okBtnLoading = false;
           });
       }
     }

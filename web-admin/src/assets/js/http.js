@@ -26,14 +26,14 @@ instance.interceptors.response.use(
     switch (res.data.errno) {
       case 201:
         store.state.vue.$Message.error(res.data.errmsg);
-        break;
+        return Promise.reject(res);
       case 202:
         store.state.vue.$Message.error(res.data.errmsg);
         store.commit("setToken", "");
         router.push({
           name: "Login"
         });
-        break;
+        return Promise.reject(res);
       default:
         return res;
     }
@@ -66,7 +66,11 @@ function requestMode1(url, params, method, headers = null) {
       headers
     })
       .then(res => {
-        res && resolve(res.data.data);
+        if (!res) {
+          reject(new Error("empty response"));
+          return;
+        }
+        resolve(res.data.data);
       })
       .catch(err => {
         reject(err);
@@ -85,7 +89,11 @@ function requestMode2(url, params, method, headers = null) {
       headers
     })
       .then(res => {
-        res && resolve(res.data.data);
+        if (!res) {
+          reject(new Error("empty response"));
+          return;
+        }
+        resolve(res.data.data);
       })
       .catch(err => {
         reject(err);

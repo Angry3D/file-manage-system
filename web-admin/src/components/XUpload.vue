@@ -8,6 +8,7 @@
     :before-upload="onBeforeUpload"
     :on-format-error="onFormatError"
     :on-success="onSuccess"
+    :on-error="onError"
     :show-upload-list="false"
     :default-file-list="defaultList"
     :format="format"
@@ -70,22 +71,50 @@ export default {
         duration: 3
       });
     },
+    setFileFail(file) {
+      if (!file) {
+        return;
+      }
+      file.status = "fail";
+      delete file.url;
+      delete file.urlThumb;
+      delete file.urlID;
+    },
     onSuccess(res, file) {
-      switch (res.errno) {
+      const errno = res && res.errno;
+      const errmsg = res && res.errmsg;
+      const data = res && res.data;
+      switch (errno) {
         case 201:
-          this.$Message.error(res.errmsg);
+          this.setFileFail(file);
+          this.$Message.error(errmsg);
           return;
         case 202:
-          this.$Message.error(res.errmsg);
+          this.setFileFail(file);
+          this.$Message.error(errmsg);
           this.$store.commit("setToken", "");
           this.$router.push({
             name: "Login"
           });
           return;
       }
-      file.url = res.data.url;
-      file.urlThumb = res.data.url_thumb;
-      file.urlID = res.data.id;
+      if (errno !== 0) {
+        this.setFileFail(file);
+        this.$Message.error(errmsg || "上传失败，请稍后重试");
+        return;
+      }
+      if (!data || !data.url || !data.url_thumb || !data.id) {
+        this.setFileFail(file);
+        this.$Message.error("上传返回数据不完整，请重试");
+        return;
+      }
+      file.url = data.url;
+      file.urlThumb = data.url_thumb;
+      file.urlID = data.id;
+    },
+    onError(err, response, file) {
+      this.setFileFail(file);
+      this.$Message.error("上传失败，请检查网络后重试");
     },
     // other
     getList() {
