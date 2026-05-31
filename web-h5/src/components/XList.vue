@@ -35,6 +35,9 @@ export default {
     },
     onPushdata: {
       type: Function
+    },
+    onError: {
+      type: Function
     }
   },
   data() {
@@ -55,7 +58,9 @@ export default {
     },
     // other
     reset() {
-      this.onGetdata([]);
+      this.list = [];
+      this.loading = false;
+      this.onGetdata && this.onGetdata([]);
       // finished 必须经过 true => false 的过程，list才会重新触发onLoad
       this.finished = true;
       this.$nextTick(() => {
@@ -90,7 +95,10 @@ export default {
           }
         })
         .catch(() => {
+          this.page = Math.max(0, this.page - 1);
           this.loading = false;
+          this.onError && this.onError();
+          this.$emit("request-error");
         });
     }
   }
