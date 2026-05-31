@@ -39,7 +39,7 @@
 | TODO-0001 | candidate | feature | 新增视频管理能力。 | `README.md` 当前功能边界 | 根 README 说明当前暂不包含视频管理。 | 用户已明确本次暂缓；不要纳入当前阶段。 |
 | TODO-0002 | candidate | feature | 新增文档管理和前端展现能力，覆盖 PDF / WORD / EXCEL / PPT / TXT。 | `README.md` 当前功能边界 | 根 README 说明当前暂不包含文档管理。 | 用户已明确本次暂缓；不要纳入当前阶段。 |
 | TODO-0003 | candidate | feature | 新增 Flutter 前端。 | `README.md` 当前功能边界 | 根 README 说明当前暂不包含 Flutter 前端。 | 用户已明确本次暂缓；不要纳入当前阶段。 |
-| TODO-0005 | todo | refactor | 完善当前项目已有功能，优先围绕已实现的图片管理和展示能力做质量提升。 | 用户明确本次任务目标 | 用户说明“本次任务的核心目标是完善当前项目的已有功能，而不是做新功能迭代”。 | 已沉淀细化计划：`docs/plans/todo-0005-image-quality-plan.md`、`docs/plans/todo-0005-image-quality-implementation.md`；后续继续避免扩展到视频、文档、Flutter 等新功能。 |
+| TODO-0005 | done | refactor | 完善当前项目已有功能，优先围绕已实现的图片管理和展示能力做质量提升。 | 用户明确本次任务目标 | 用户说明“本次任务的核心目标是完善当前项目的已有功能，而不是做新功能迭代”。 | 已完成细化计划中的 Todo 1-7；等待用户确认或明确要求后再归档。 |
 | TODO-0015 | candidate | research | P3 TypeScript 渐进迁移评估，暂不作为本轮实施主线。 | 用户关于 TS 的疑问；项目通读 | 当前项目是 Vue 2 + ThinkJS 3 + 老 Vue CLI，多处依赖较旧；本轮目标是完善已有功能和依赖安全治理。 | 结论倾向暂缓；更适合在依赖安全稳定后，结合 Vue 3/Vite 或框架升级再评估。 |
 
 ## 维护规则
