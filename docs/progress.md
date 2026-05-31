@@ -7,29 +7,38 @@
 
 ## 当前目标
 
-暂无正在执行的阶段。
-
-上一阶段“图片管理与展示质量继续提升”已归档到 `docs/archive/2026-05-31-image-quality-followup.md`。
+执行 TODO-0018：增加本地开发一键启动方式。
 
 ## 关联待办
 
-暂无。
+TODO-0018
 
 ## 当前计划
 
-暂无。
+1. 将根 `dev` 脚本改为 pnpm workspace 并行编排：同时运行 `server`、`web-front`、`web-h5` 的 `dev` 脚本。
+2. 给 `server`、`web-admin`、`web-h5` 分别补充跨平台 `dev` 脚本。
+3. 用 Node 实现服务端开发入口，负责启动 ThinkJS API 和本地图片静态文件服务。
+4. 移除 bash 根启动脚本，更新 README 和项目事实。
+5. 执行轻量验证，确认脚本语法、JSON 和服务端关键文件通过。
 
 ## 任务拆解
 
-暂无。
+| 任务 | 状态 | 备注 |
+| --- | --- | --- |
+| 替换根启动入口 | done | 已改为 pnpm workspace 并行执行。 |
+| 补充各 workspace `dev` 脚本 | done | 已覆盖服务端、管理端、H5。 |
+| 实现服务端开发入口 | done | 已用 Node 启动 API 和静态文件服务。 |
+| 更新文档说明 | done | 已更新根 README、各端 README 和 `docs/project-facts.md`。 |
+| 验证脚本 | done | 已执行 Node 语法、JSON、服务端和 diff 检查。 |
 
 ## 状态
 
-idle
+done
 
 ## 决策记录
 
-- 2026-05-31：TODO-0005 已完成并归档。
+- 2026-05-31：TODO-0017 已完成并按用户明确要求归档。
+- 2026-05-31：用户询问本地开发是否可以一键启动，决定新增根目录开发启动入口，不推进新业务功能。
 
 ## 阻塞项
 
@@ -37,9 +46,11 @@ idle
 
 ## 验证
 
-- 2026-05-31：归档开始前确认 TODO-0005 对应提交记录存在。
-- 2026-05-31：归档前执行 `git diff --check` 通过。
+- 2026-05-31：`node --check server/script/dev.js` 通过。
+- 2026-05-31：`node -e "for (const f of ['package.json','server/package.json','web-admin/package.json','web-h5/package.json']) JSON.parse(require('fs').readFileSync(f,'utf8'))"` 通过。
+- 2026-05-31：`pnpm run verify:server` 通过。
+- 2026-05-31：`git diff --check` 通过。
 
 ## 下一步
 
-当前阶段目标内的图片管理、依赖治理、安全问题、使用说明补充和 TODO-0005 后续质量提升均已完成并归档。后续不建议继续推进视频、文档管理、Flutter 或 TypeScript 迁移，除非用户明确调整范围。
+等待用户确认是否将 TODO-0018 归档；如确认，则创建归档文件、更新归档索引、从 `docs/backlog.md` 移除 TODO-0018，并重置本文档。

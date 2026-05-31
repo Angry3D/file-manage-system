@@ -4,6 +4,7 @@
   "version": "1.0.0",
   "author": "Relax",
   "scripts": {
+    "dev": "node script/dev.js",
     "start": "node development.js & ./script/file-server.sh",
     "serve": "node production.js",
     "test": "THINK_UNIT_TEST=1 nyc ava test/ && nyc report --reporter=html",

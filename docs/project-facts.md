@@ -50,6 +50,11 @@
 - pnpm workspace 当前纳入 `server/`、`web-admin/`、`web-h5/` 三个子项目。
 - 根 `package.json` 通过 `engines.pnpm` 声明 pnpm 版本范围为 `>=10 <11`，并提供递归 `build`、`lint`、`test` 脚本。
 - 根 `package.json` 提供 `verify`、`verify:lock`、`verify:server`、`verify:web-admin`、`verify:web-h5` 和 `audit:prod` 脚本。
+- 根 `package.json` 提供 `dev` 脚本，通过 pnpm workspace 并行运行 `server`、`web-front`、`web-h5` 的 `dev` 脚本。
+- `server/package.json` 提供 `dev` 脚本，通过 `server/script/dev.js` 启动 ThinkJS 开发入口和本地图片静态文件服务。
+- `web-admin/package.json` 提供 `dev` 脚本，开发端口固定为 `8080`。
+- `web-h5/package.json` 提供 `dev` 脚本，开发端口固定为 `8081`。
+- `server/script/dev.js` 默认端口为 API `20000`、本地图片文件服务 `11000`，可通过 `BABYLIFE_SERVER_PORT`、`BABYLIFE_FILE_SERVER_PORT`、`BABYLIFE_FILE_HOST`、`BABYLIFE_UPLOAD_DIR` 覆盖服务端开发配置。
 - `docs/verification.md` 记录最小验证体系、分项验证、安全审计和当前已知限制。
 - 根 `.npmrc` 显式配置 `node-linker=hoisted` 和 `shared-workspace-lockfile=true`，用于兼容 ThinkJS 3、Vue CLI 3/4 等老工具链的依赖解析。
 - 根 `package.json` 通过 `pnpm.overrides` 定向覆盖 ThinkJS 间接链路中的 `validator`、`ms` 和 `uuid`，用于降低 `think-validator`、`think-helper`、`think-ms` 相关生产依赖漏洞风险。
@@ -156,6 +161,7 @@
 - `pnpm build`：递归执行存在的 `build` 脚本。
 - `pnpm test`：递归执行存在的 `test` 脚本。
 - `pnpm run verify`：执行当前最小验证体系。
+- `pnpm run dev`：一键启动服务端 API、本地图片文件服务、管理端和 H5 端。
 - `pnpm run audit:prod`：审计生产依赖漏洞；当前因 Vue 2 low 漏洞返回非 0。
 - `pnpm --filter server <script>`：只在服务端执行脚本。
 - `pnpm --filter web-front <script>`：只在管理端执行脚本。

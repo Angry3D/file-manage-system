@@ -18,6 +18,14 @@ pnpm install
 在仓库根目录执行：
 
 ```sh
+pnpm --filter web-h5 dev
+```
+
+该命令会固定使用 `8081` 端口。
+
+也可以使用历史启动脚本：
+
+```sh
 pnpm --filter web-h5 serve
 ```
 

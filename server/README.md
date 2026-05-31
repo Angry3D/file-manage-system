@@ -30,10 +30,18 @@ pnpm --filter server <script>
 开发启动：
 
 ```sh
+pnpm --filter server dev
+```
+
+该命令会启动 ThinkJS 开发入口，并通过 Node 内置 HTTP 服务启动本地静态文件服务，便于跨平台本地开发。
+
+也可以使用历史启动脚本：
+
+```sh
 pnpm --filter server start
 ```
 
-该命令会启动 ThinkJS 开发入口，并通过 `server/script/file-server.sh` 启动本地静态文件服务。
+历史启动脚本会通过 `server/script/file-server.sh` 启动本地静态文件服务，依赖当前环境可用的 `live-server`。
 
 生产入口：
 

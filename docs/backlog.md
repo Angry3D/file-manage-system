@@ -9,7 +9,7 @@
 
 ## 编号规则
 
-下一个待办 ID：TODO-0017
+下一个待办 ID：TODO-0019
 
 新增待办时使用上面的 ID，然后递增该值。不要依赖历史归档中的最大编号来推断下一个 ID。
 
@@ -40,6 +40,7 @@
 | TODO-0002 | candidate | feature | 新增文档管理和前端展现能力，覆盖 PDF / WORD / EXCEL / PPT / TXT。 | `README.md` 当前功能边界 | 根 README 说明当前暂不包含文档管理。 | 用户已明确本次暂缓；不要纳入当前阶段。 |
 | TODO-0003 | candidate | feature | 新增 Flutter 前端。 | `README.md` 当前功能边界 | 根 README 说明当前暂不包含 Flutter 前端。 | 用户已明确本次暂缓；不要纳入当前阶段。 |
 | TODO-0015 | candidate | research | P3 TypeScript 渐进迁移评估，暂不作为本轮实施主线。 | 用户关于 TS 的疑问；项目通读 | 当前项目是 Vue 2 + ThinkJS 3 + 老 Vue CLI，多处依赖较旧；本轮目标是完善已有功能和依赖安全治理。 | 结论倾向暂缓；更适合在依赖安全稳定后，结合 Vue 3/Vite 或框架升级再评估。 |
+| TODO-0018 | done | chore | 增加本地开发一键启动方式。 | 用户询问是否可以一键启动 | 当前需要分别启动服务端、管理端和 H5；服务端还会启动本地图片文件服务。 | 已改为 pnpm monorepo 内置并行启动方案；等待用户确认后归档。 |
 
 ## 维护规则
 
