@@ -1,6 +1,6 @@
 # 归档
 
-最后更新：2026-05-30
+最后更新：2026-05-31
 语系：cn
 
 本目录存放已完成阶段的记录。每个完成阶段使用一个独立 Markdown 文件，不要把所有历史持续追加到单个文件中。
@@ -32,6 +32,7 @@ YYYY-MM-DD-short-stage-name.md
 | 2026-05-30 | [2026-05-30-image-quality-dependency-governance.md](2026-05-30-image-quality-dependency-governance.md) | TODO-0006, TODO-0007, TODO-0008, TODO-0009, TODO-0010, TODO-0011, TODO-0012, TODO-0013, TODO-0014 | 图片链路质量提升与依赖治理 |
 | 2026-05-30 | [2026-05-30-service-production-audit.md](2026-05-30-service-production-audit.md) | TODO-0016 | 服务端生产依赖漏洞治理 |
 | 2026-05-30 | [2026-05-30-project-usage-documentation.md](2026-05-30-project-usage-documentation.md) | TODO-0004 | 项目使用说明补充 |
+| 2026-05-31 | [2026-05-31-image-quality-followup.md](2026-05-31-image-quality-followup.md) | TODO-0005 | 图片管理与展示质量继续提升 |
 
 
 ## 工作流
