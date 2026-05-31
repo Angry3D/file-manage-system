@@ -34,6 +34,7 @@ YYYY-MM-DD-short-stage-name.md
 | 2026-05-30 | [2026-05-30-project-usage-documentation.md](2026-05-30-project-usage-documentation.md) | TODO-0004 | 项目使用说明补充 |
 | 2026-05-31 | [2026-05-31-image-quality-followup.md](2026-05-31-image-quality-followup.md) | TODO-0005 | 图片管理与展示质量继续提升 |
 | 2026-05-31 | [2026-05-31-final-verification-summary.md](2026-05-31-final-verification-summary.md) | TODO-0017 | 最终验证与阶段总结 |
+| 2026-05-31 | [2026-05-31-pnpm-workspace-dev-startup.md](2026-05-31-pnpm-workspace-dev-startup.md) | TODO-0018 | pnpm workspace 本地开发一键启动 |
 
 
 ## 工作流
